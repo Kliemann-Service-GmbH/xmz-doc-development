@@ -1,6 +1,8 @@
 # xmz-doc-development
 Dokumentation der xMZ-Plattform (Development Version)
 
+[![Build Status](https://travis-ci.org/Kliemann-Service-GmbH/xmz-doc-development.svg?branch=development)](https://travis-ci.org/Kliemann-Service-GmbH/xmz-doc-development)
+
 ## Quellcode auschecken
 
 ```bash
