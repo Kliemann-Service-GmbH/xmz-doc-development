@@ -1,4 +1,12 @@
 language: rust
+before_install:
+    - set -e
+    - rustup self update
+
+install:
+    - source ~/.cargo/env || true
+script:
+    - true
 after_success: |
   [ $TRAVIS_BRANCH = master ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
