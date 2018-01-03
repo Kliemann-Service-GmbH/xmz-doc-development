@@ -1,0 +1,7 @@
+[book]
+title = "Dokumentation xMZ (dev)"
+authors = ["Sefan Müller <s.mueller@it.kls-glt.de>"]
+multilingual = false
+description = "Dokumentation der xMZ-Plattform (Development Version)"
+src = "src"
+
