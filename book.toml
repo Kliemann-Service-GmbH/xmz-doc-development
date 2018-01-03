@@ -5,5 +5,3 @@ multilingual = false
 description = "Dokumentation der xMZ-Plattform (Development Version)"
 src = "src"
 
-[build]
-build-dir = "docs"
