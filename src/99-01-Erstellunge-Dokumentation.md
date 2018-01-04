@@ -129,7 +129,32 @@ Anschließend wird mti dem kleinen Schalter vor dem Namen des Repos das Reposito
 
 ### Travis einbinden
 
+Travis benutzt die Datei `.travis.yml` zur Konfiguration.
 
+Lege nun diese Datei im Root der mdBook Quellen an.
+
+```yml
+language: rust
+branches:
+  only:
+  - master
+before_install:
+    - set -e
+    - rustup self update
+install:
+    - source ~/.cargo/env || true
+    - true
+script:
+    - true
+after_success: |
+  [ $TRAVIS_BRANCH = master ] &&
+  [ $TRAVIS_PULL_REQUEST = false ] &&
+  cargo install --git https://github.com/rust-lang-nursery/mdBook.git &&
+  mdbook build &&
+  sudo pip install ghp-import &&
+  ghp-import -n book &&
+  git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+```
 
 ### Travis Berechtigungen
 
