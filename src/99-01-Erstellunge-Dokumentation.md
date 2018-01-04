@@ -85,10 +85,21 @@ dieser Stand in die Änderungsliste aufgenommen.
 
 Als nächstes legen wir auf [Github.com][github] ein Repository an.
 
+Klickt dazu in eurem Profil auf den grünen "New repository" Button ...
+
+![][00-github]
+
+und füllt die entsprechenden Felder aus.
+
+![][01-github]
+
+Nachdem auf den grünen Button "Create repository" geklickt wurde kann die Remote Adresse in das lokale Git Repository eingetragen werden.
 
 ```bash
 git remote add origin git@github.com:Kliemann-Service-GmbH/xmz-doc.git
 ```
+
+Anschließend wird der master Branch in den remoten Origin Zweig gepusht.
 
 ```bash
 git push -u origin master
@@ -102,33 +113,27 @@ Als nächstes müssen wir das Github Repository in [Travis][travis] aktivieren.
 
 Dazu öffnen wir die URL https://travis-ci.org/ im Browser.
 
+![][travis-repo-00]
 
+Ein Klick auf das Plus Symbol führt zu einer Übersicht der Github Repositories.
+
+Travis aktualisert die Liste nicht automatisch wenn wir auf Github ein neues Repo erstellt haben müssen wir mit dem Button **Sync account** die Travis-Repo-Liste aktualisieren.
+
+![][travis-repo-01]
+
+Anschließend wird mti dem kleinen Schalter vor dem Namen des Repos das Repository in Travis aktiviert.
+
+![][travis-repo-02]
+
+![][travis-repo-03]
 
 ### Travis einbinden
 
-```bash
-```
-
-```bash
-```
-
-```bash
-```
-
-```bash
-```
-
-```bash
-```
-
-```bash
-```
-
-```bash
-```
 
 
 ### Travis Berechtigungen
+
+Jetzt muss der Zugriff von Travis auf unser Github Repository aktiviert werden.
 
 ![][00]
 
@@ -192,3 +197,11 @@ Die Github Einstellungen findet man unter //Settings// -> //Github Pages//
 [05]: images/Erstellung-Dokumentation/05-tick-public_repo.png
 [06]: images/Erstellung-Dokumentation/06-click-Generate-token.png
 [07]: images/Erstellung-Dokumentation/07-search-Settings-Github-Pages-your-side-should-up-and-running-now.png
+
+[00-github]: images/Erstellung-Dokumentation/00-github-New-repository.png
+[01-github]: images/Erstellung-Dokumentation/01-github-Create-new-repository.png
+
+[travis-repo-00]: images/Erstellung-Dokumentation/travis-repo-00-new.png
+[travis-repo-01]: images/Erstellung-Dokumentation/travis-repo-01-Sync-account.png
+[travis-repo-02]: images/Erstellung-Dokumentation/travis-repo-02-Repo-disabled.png
+[travis-repo-03]: images/Erstellung-Dokumentation/travis-repo-03-Repo-enabled.png
