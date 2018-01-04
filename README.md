@@ -4,6 +4,19 @@
 
 ## Quellcode auschecken
 
+Dieses Repository ist Teil der [xMZ-Plattform][xmz]. Es wird empfohlen alle Komponenten
+auszuchecken.
+
+Der Quellcode kann mit folgendem Git Befehl herunter geladen werden.
+Der Parameter `--recursive` sorgt dafür das alle Komponenten (git submodule)
+ebenfalls herunter geladen werden.
+
+```bash
+git clone --recursive https://github.com/Kliemann-Service-GmbH/xMZ-Plattform.git
+```
+
+Alternative kann auch nur dieses Repository ausgecheckt werden.
+
 ```bash
 git clone https://github.com/Kliemann-Service-GmbH/xmz-doc-development.git
 ```
@@ -26,3 +39,8 @@ der unter der Adresse [https//localhost:3000](http://localhost:3000) erreichbar
 ist.
 
 
+# Links
+
+* https://github.com/Kliemann-Service-GmbH/xMZ-Plattform
+
+[xmz]: https://github.com/Kliemann-Service-GmbH/xMZ-Plattform
