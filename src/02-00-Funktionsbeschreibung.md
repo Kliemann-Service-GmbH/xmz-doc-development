@@ -11,18 +11,27 @@ als Clientzugriffe bezeichnet.
 
 Der Server startet frühest möglich nach dem Betriebsystemstart.
 
+Beim Start des Servers wird dessen Version ($CARGO_PKG_VERSION) auf `STDOUT` ausgegeben.
+
+Beispiel Ausgabe des Servers:
+```bash
+xmz-server: 0.1.0
+```
+
 Im Kapitel [Verwaltung: Server](/50-01-Verwaltung-Server.html#verwaltung-server) wird erklärt wie man den Server neu starten kann.
 
 Beim Start des Servers wird die Konfigurationsdatei gelesen. Die Konfiguration kann
 unter folgenden Pfaden gespeichert sein:
-  - `/boot/xMZ-Mod-Touch.hjson`
-  - `xMZ-Mod-Touch.hjson` (aktuelles Verzeichnis)
+  - `/boot/xmz.toml`
+  - `xmz.toml` (aktuelles Verzeichnis)
 Spätere Konfigurationsdateien überschreiben frühere!
 
 Wird keine Konfigurationsdatei gefunden, startet der Server nicht, und es wird
 ein Fehler ausgegeben.
-Kann die Konfiguration nicht richtig ausgewertet werden startet der Server nicht.
-Eine entsprechende Fehlermeldung wird auf `STDOUT` und `STDERR` ausgegeben.
+
+Kann die Konfiguration nicht richtig ausgewertet werden startet der Server nicht, und es wird ein Fehler ausgegeben.
+
+Die Fehler werden auf `STDERR` ausgegeben
 
 Danach werden die Laufzeit Informationen gelesen `/var/cache/xmz-server`.
 Diese existieren aber erst wenn der Server schon einmal erfolgreich gestartet wurde.

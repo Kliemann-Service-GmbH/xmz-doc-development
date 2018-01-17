@@ -1,11 +1,15 @@
 # Serverkonfiguration
 [Serverkonfiguraiton]: #serverkonfiguration
 
-Die Konfiguration des Servers erfolgt nach dem so genannten "Layered configuration system". Diese Idee stammt aus den "Vorgaben" der [12-factor] Anwendunge
+Die Konfiguration des Servers erfolgt nach dem so genannten "Layered configuration system". Diese Idee stammt aus den "Vorgaben" der [12-factor] Anwendungen.
+
+"Layered configuration" bedeutet das es mehrer Konfigurationsdateien geben kann.
+Eine Basis Konfiguration kann mit einer oder mehreren Konfigurationsdateien überschrieben werden.
 
 
-- Format der Konfigurationsdatei [hjson][hjson]
-- Pfad der Konfigurationsdatei ist hard coded [`/boot/xMZ-Mod-Touch.hjson`, `xMZ-Mod-Touch.hjson`] in dieser Reihenfolge
+
+- Format der Konfigurationsdatei [toml][toml]
+- Pfad der Konfigurationsdatei ist hard coded [`/boot/xmz.toml`, `xmz.toml`] in dieser Reihenfolge
   - optional kann der Name der Konfigurationsdatei, als Parameter, der Server Executable übergeben werden.
 
 Aus der Konfiguration wird eine `ServerConfig` Struktur erstellt.
@@ -24,8 +28,8 @@ gespeichert:
 [Links]: #links
 
 - [12-factor]
-- [https://hjson.org][hjson]
+- [https://github.com/alexcrichton/toml-rs][toml]
 
 
 [12-factor]: https://12factor.net/config
-[hjson]: https://hjson.org/
+[toml]: https://github.com/alexcrichton/toml-rs
