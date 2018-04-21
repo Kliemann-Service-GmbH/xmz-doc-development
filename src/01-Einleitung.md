@@ -42,3 +42,4 @@ Diese Version beinhaltet alle Informationen die bei der Entwicklung der 'xMZ-Pla
 <!-- Bilder -->
 
 [xmz-mod-touch]: images/1477665135160_02-bw.jpg
+[xmz-server-start]: images/xmz-server-start.svg

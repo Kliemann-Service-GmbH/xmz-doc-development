@@ -7,20 +7,33 @@ Beim Start des Servers wird dessen Version (`$CARGO_PKG_VERSION`) auf `STDOUT` a
 
 Im Kapitel [Verwaltung: Server](/50-01-Verwaltung-Server.html#verwaltung-server) wird erklärt wie man den Server neu starten, und den Status des Servers prüfen kann.
 
-## Implementationsdetails
+## Bootstrapping, Konfiguration und Laufzeit Informationen
 
-- alle Komponenten des Servers sollten `Default` Implementationen besizen
+Beim allerersten Start des Servers wird die Server Instanz aus einer initialen Konfigurationsdatein erstellt. Dies wird auch als **Bootstrapping** bezeichnet.
 
-## Bootstrapping; erster Start
+Konnte aus dieser ersten Konfiguration eine funktionale Server Intanz gestartet werden, wird eine Datei mit den Laufzeit Informationen (der aktuelle Zustand des Servers) erzeugt.
 
-- ist keine Laufzeit Information `/var/cache/xmz-server/status` vorhanden muss der Server aus der Bootstrapping Datei `/boot/xmz.toml` erstellt werden.
-  - **Kann keine Instanz erstellt werden ist das ein Critical Fehler!!** Der Server startet in diesem Fall nicht!
+Alle weiteren Starts des Servers verwenden diese Laufzeit Informationen.
 
-## Funktionsbeschreibung Konfiguration Server
+Dies gewährleistet das Daten wie die Laufzeit "persistent" gespeichert werden können (d.h. das diese nicht nach einem Neustart verloren gehen).
+
+**Kann keine Instanz erstellt werden ist das ein Critical Fehler!!** Der Server startet in diesem Fall nicht!
+
+### Datei: Initale Konfiguration, Bootstrapping
+
+-  `/boot/xmz-server.toml`
+
+### Datei: Laufzeit Informationen
+
+- `/var/cache/xmz-server/status`
+
+
+
+## Konfiguration Server
 
 Wie in der [Implementation: Serverkonfiguration](/03-01-02-Implementation-Serverkonfiguration.html) beschreiben, werden zur Konfiguration der Serverkomponenten Umbgebungsvariablen verwendet.
 
-Es existieren 2 Arten möglicher Environment Variablen:
+Es gibt verschiedene Arten dieser Environment Variablen:
 
 - `ROCKET_` - diese sind für die Rocket Kom
 
@@ -57,15 +70,7 @@ RestartSec=10s
 
 ## Fehlerbehandlung
 
-Die Fehler werden auf `STDERR` ausgegeben
-
-## Laufzeit Imformationen
-
-Laufzeit Informationen werden unter `/var/cache/xmz-server/status` gespeichert.
-
-**Das Dateiformat von `/var/cache/xmz-server/status` ist noch nicht entschieden!**
-
-`/var/cache/xmz-server/status` existiert erst wenn der Server einmal, erfolgreich aus der Konfigurationsdatei `/boot/xmz-server.toml` erzeugt und gestartet wurde.
+Die Fehler können auf `STDERR` ausgegeben werden.
 
 ### Server Tread: json API
 
@@ -73,8 +78,7 @@ Die Serverinstanz startet ein HTTP Server (`rocket`) mit einer json API die zur 
 
 ### Server Tread: Persistent Data
 
-In regelmäßigen Abständen speichert der Server Laufzeit Informationen nach
-`/var/cache/xmz-server/status`
+In regelmäßigen Abständen speichert der Server die aktuellen Laufzeit Informationen unter: `/var/cache/xmz-server/status`
 
 ### Server Tread: Sensoren auslesen
 
