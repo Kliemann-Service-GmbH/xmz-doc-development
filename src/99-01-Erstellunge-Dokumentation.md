@@ -202,9 +202,10 @@ Die Github Einstellungen findet man unter //Settings// -> //Github Pages//
 # Links
 [Links]: #links
 
-- https://github.com
-- https://travis-ci.org
--
+- [https://github.com][github]
+- [https://travis-ci.org][travis]
+
+
 
 [blog]: https://hoverbear.org/2015/03/07/rust-travis-github-pages/
 [gh-pages]: https://pages.github.com/
