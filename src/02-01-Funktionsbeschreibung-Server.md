@@ -9,7 +9,10 @@ Im Kapitel [Verwaltung: Server](/50-01-Verwaltung-Server.html#verwaltung-server)
 
 ## Bootstrapping, Konfiguration und Laufzeit Informationen
 
-Beim allerersten Start des Servers wird die Server Instanz aus einer initialen Konfigurationsdatein erstellt. Dies wird auch als **Bootstrapping** bezeichnet.
+Beim allerersten Start des Servers wird die Server Instanz aus einer initialen
+Konfigurationsdatein () erstellt. Dieser Vorgang wird auch als **Bootstrapping**
+bezeichnet.
+Siehe ["Implementation: Bootstrapping, Konfiguration und Laufzeit Informationen"](/03-01-02-Implementation-Bootstrap-Konfiguration.html)
 
 Konnte aus dieser ersten Konfiguration eine funktionale Server Intanz gestartet werden, wird eine Datei mit den Laufzeit Informationen (der aktuelle Zustand des Servers) erzeugt.
 
@@ -23,10 +26,13 @@ Dies gewährleistet das Daten wie die Laufzeit "persistent" gespeichert werden k
 
 -  `/boot/xmz-server.toml`
 
+Diese Datein kann über die Umgebungsvariable `XMZ_SERVER_CONFIGURATION_PATH` geändert werden.
+
 ### Datei: Laufzeit Informationen
 
 - `/var/cache/xmz-server/status`
 
+Diese Datein kann über die Umgebungsvariable `XMZ_SERVER_RUNTIME_INFO_PATH` geändert werden.
 
 
 ## Konfiguration Server
@@ -35,7 +41,8 @@ Wie in der [Implementation: Serverkonfiguration](/03-01-02-Implementation-Server
 
 Es gibt verschiedene Arten dieser Environment Variablen:
 
-- `ROCKET_` - diese sind für die Rocket Kom
+- `XMZ_SERVER_` - diese Variablen steuern Eigenschaften der Server Komponente
+- `ROCKET_` - diese Variablen steuern Eigenschaften der Rocket Web Komponente
 
 Die Umgebungsvariablen können "von Hand" beim Start der `xmz-server` Anwendung übergeben werden. In Produktivsystemen werden die Variablen via des systemd Unit Files übergeben.
 
@@ -67,6 +74,16 @@ Restart=always
 RestartSec=10s
 ```
 </details>
+
+
+### Übersicht Umgebungsvariablen
+
+|Umbgebunsvariable|Funktionsbeschreibung|
+|:---|:---|
+|XMZ_SERVER_CONFIGURATION_PATH|Speicherort der initialen Bootstrap Konfigurationsdatei
+|XMZ_SERVER_RUNTIME_INFO_PATH|Speicherort der Laufzeit Informationen
+|ROCKET_ENV|Rocket Umgebung
+|ROCKET_ADDRESS|Adresse über die die Rocket Instanz erreichbar ist
 
 ## Fehlerbehandlung
 
