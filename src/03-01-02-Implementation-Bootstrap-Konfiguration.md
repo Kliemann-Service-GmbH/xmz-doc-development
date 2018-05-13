@@ -2,6 +2,7 @@
 
 ![Flussdiagramm Bootrapping, Konfiguration][xmz-server-start]
 
+[Draw.io](https://www.draw.io/#Lxmz-server-start)
 
 ## Datenformat Laufzeit Information
 

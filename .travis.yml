@@ -1,7 +1,7 @@
 language: rust
-branches:
-  only:
-  - master
+#branches:
+#  only:
+#  - master
 before_install:
     - set -e
     - rustup self update

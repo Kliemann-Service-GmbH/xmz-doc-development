@@ -10,7 +10,7 @@
     - [Implementation: Serverkonfiguration](./03-01-03-Implementation-Serverkonfiguration.md)
     - [Sensoren](./03-01-04-Sensoren.md)
     - [Zonen](./03-01-05-Zonen.md)
-    - [Web und json API](./03-01-06-Web_JSON_API.md)
+    - [Web und JSON API](./03-01-06-Web_JSON_API.md)
   - [GUI](./03-02-00-GUI.md)
 - [Verwaltung](./50-00-Verwaltung.md)
   - [Verwaltung: Server](./50-01-Verwaltung-Server.md)
