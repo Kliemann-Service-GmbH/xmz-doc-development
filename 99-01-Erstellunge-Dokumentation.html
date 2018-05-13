@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Erstellung der Dokumentation - Dokumentation xMZ (dev)</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Dokumentation der xMZ-Plattform (Development Version)">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="01-Einleitung.html"><strong aria-hidden="true">1.</strong> Einleitung</a></li><li><a href="02-00-Funktionsbeschreibung.html"><strong aria-hidden="true">2.</strong> Funktionsbeschreibung</a></li><li><ol class="section"><li><a href="02-01-Funktionsbeschreibung-Server.html"><strong aria-hidden="true">2.1.</strong> Funktionsbeschreibung: Server</a></li></ol></li><li><a href="03-00-00-Implementation.html"><strong aria-hidden="true">3.</strong> Implementation</a></li><li><ol class="section"><li><a href="03-01-00-Server.html"><strong aria-hidden="true">3.1.</strong> Server</a></li><li><ol class="section"><li><a href="03-01-01-Implementation-Serverstart.html"><strong aria-hidden="true">3.1.1.</strong> Implementation: Serverstart</a></li><li><a href="03-01-02-Implementation-Bootstrap-Konfiguration.html"><strong aria-hidden="true">3.1.2.</strong> Implementation: Bootstrapping, Konfiguration und Laufzeit Informationen</a></li><li><a href="03-01-03-Implementation-Serverkonfiguration.html"><strong aria-hidden="true">3.1.3.</strong> Implementation: Serverkonfiguration</a></li><li><a href="03-01-04-Sensoren.html"><strong aria-hidden="true">3.1.4.</strong> Sensoren</a></li><li><a href="03-01-05-Zonen.html"><strong aria-hidden="true">3.1.5.</strong> Zonen</a></li><li><a href="03-01-06-Web_JSON_API.html"><strong aria-hidden="true">3.1.6.</strong> Web und JSON API</a></li></ol></li><li><a href="03-02-00-GUI.html"><strong aria-hidden="true">3.2.</strong> GUI</a></li></ol></li><li><a href="50-00-Verwaltung.html"><strong aria-hidden="true">4.</strong> Verwaltung</a></li><li><ol class="section"><li><a href="50-01-Verwaltung-Server.html"><strong aria-hidden="true">4.1.</strong> Verwaltung: Server</a></li></ol></li><li><a href="99-Buildsystem.html"><strong aria-hidden="true">5.</strong> Buildsystem</a></li><li><a href="99-Dokumentation.html"><strong aria-hidden="true">6.</strong> Dokumentation</a></li><li><ol class="section"><li><a href="99-01-Erstellunge-Dokumentation.html" class="active"><strong aria-hidden="true">6.1.</strong> Erstellung der Dokumentation</a></li></ol></li><li><a href="99-TODO.html"><strong aria-hidden="true">7.</strong> TODO</a></li><li><a href="99-Links.html"><strong aria-hidden="true">8.</strong> Links</a></li><li><a href="99-99-99-Observer-Pattern.html"><strong aria-hidden="true">9.</strong> Observer Pattern</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Dokumentation xMZ (dev)</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="99-01-Erstellunge-Dokumentation.html#erstellung-der-dokumentation" id="erstellung-der-dokumentation"><h1>Erstellung der Dokumentation</h1></a>
+<p>Die Dokumentation wird via <a href="https://pages.github.com/">Github Pages</a> gehostet.
+Branch <code>gh-pages</code>
+URL <code>https://$USERNAME.github.io/$REPOSITORY</code></p>
+<p>Gebaut mit <a href="https://travis-ci.org">TravisCI</a></p>
+<p>Travis ist die Quelle des allseits beliebten Badges wie diese <img src="images/Erstellung-Dokumentation/travis-unknown.svg" alt="Travis Buildstatus" /></p>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#installation-mdbook" id="installation-mdbook"><h2>Installation mdBook</h2></a>
+<p>Wie auf der <a href="https://github.com/rust-lang-nursery/mdBook">mdBook Projektseite</a> beschrieben wird vorab die Software mdBook auf dem lokalen Entwickler PC installiert.</p>
+<pre><code class="language-bash">cargo install mdbook
+</code></pre>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#dateisystemlayout-erstellen" id="dateisystemlayout-erstellen"><h2>Dateisystemlayout erstellen</h2></a>
+<p>Als nächstes wird ein Verzeichis erstellt das den Quellcode des mdBook enthält.</p>
+<pre><code class="language-bash">mkdir xmz-doc
+</code></pre>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#git-repository-erstellen" id="git-repository-erstellen"><h2>Git Repository erstellen</h2></a>
+<p>Wie alle Komponenten der [xMZ-Plattform][xmz] wird auch der Quellcode des mdBook in der Versionskontrolle GIT, auf Github gehalten.</p>
+<p>Wir erstellen also nun erst einmal ein lokales, leeres Git Repository</p>
+<pre><code class="language-bash">cd xmz-doc
+git init .
+</code></pre>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#mdbook-initalisieren" id="mdbook-initalisieren"><h2>mdBook initalisieren</h2></a>
+<p>Nun wird ein leeres mdBook initalisiert. Hierbei werden ein paar grundlegende Dateien angelegt.</p>
+<p>Die Frage ob eine <code>.gitignore</code> Datei angelegt werden soll muss mit <strong>ja (y)</strong> beantwortet werden.</p>
+<pre><code class="language-bash">mdbook init .
+</code></pre>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#git-repo-füllen" id="git-repo-füllen"><h2>Git Repo füllen</h2></a>
+<p>Das Dateisystemlayout sollte nun in etwa so aussehen:</p>
+<pre><code class="language-bash">$ tree
+.
+├── book
+├── book.toml
+├── LICENSE
+├── README.md
+└── src
+    ├── chapter_1.md
+    └── SUMMARY.md
+
+2 directories, 5 files
+</code></pre>
+<p>Die Dateien <code>README.md</code> und <code>LICENSE</code> habe ich manuell eingefügt, dieser Schritt ist optional.</p>
+<p>Mit dem Befehl</p>
+<pre><code class="language-bash">git add .
+</code></pre>
+<p>werden nun die Dateien in die Git Versionskontrolle aufgenommen. Das heist Dateien und Ordner die in der <code>.gitignore</code> Datei gelistet sind werden ignoriert.</p>
+<p>Anschließend wir mit dem Befehl,</p>
+<pre><code class="language-bash">git commit -a -m &quot;Erster Commit, mdBook Grundstruktur&quot;
+</code></pre>
+<p>dieser Stand in die Änderungsliste aufgenommen.</p>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#git-repo-auf-github-veröffentlichen" id="git-repo-auf-github-veröffentlichen"><h2>Git Repo auf Github veröffentlichen</h2></a>
+<p>Als nächstes legen wir auf <a href="https://github.com">Github.com</a> ein Repository an.</p>
+<p>Klickt dazu in eurem Profil auf den grünen &quot;New repository&quot; Button ...</p>
+<p><img src="images/Erstellung-Dokumentation/00-github-New-repository.png" alt="" /></p>
+<p>und füllt die entsprechenden Felder aus.</p>
+<p><img src="images/Erstellung-Dokumentation/01-github-Create-new-repository.png" alt="" /></p>
+<p>Nachdem auf den grünen Button &quot;Create repository&quot; geklickt wurde kann die Remote Adresse in das lokale Git Repository eingetragen werden.</p>
+<pre><code class="language-bash">git remote add origin git@github.com:Kliemann-Service-GmbH/xmz-doc.git
+</code></pre>
+<p>Anschließend wird der master Branch in den remoten Origin Zweig gepusht.</p>
+<pre><code class="language-bash">git push -u origin master
+</code></pre>
+<p>Das Repository ist nun unter der URL https://github.com/Kliemann-Service-GmbH/xmz-doc erreichbar.</p>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#repo-in-travis-aktivieren" id="repo-in-travis-aktivieren"><h2>Repo in Travis aktivieren</h2></a>
+<p>Als nächstes müssen wir das Github Repository in <a href="https://travis-ci.org">Travis</a> aktivieren.</p>
+<p>Dazu öffnen wir die URL https://travis-ci.org/ im Browser.</p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-00-new.png" alt="" /></p>
+<p>Ein Klick auf das Plus Symbol führt zu einer Übersicht der Github Repositories.</p>
+<p>Travis aktualisert die Liste nicht automatisch wenn wir auf Github ein neues Repo erstellt haben müssen wir mit dem Button <strong>Sync account</strong> die Travis-Repo-Liste aktualisieren.</p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-01-Sync-account.png" alt="" /></p>
+<p>Anschließend wird mti dem kleinen Schalter vor dem Namen des Repos das Repository in Travis aktiviert.</p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-02-Repo-disabled.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-03-Repo-enabled.png" alt="" /></p>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#travis-einbinden" id="travis-einbinden"><h3>Travis einbinden</h3></a>
+<p>Travis benutzt die Datei <code>.travis.yml</code> zur Konfiguration.</p>
+<p>Lege nun diese Datei im Root der mdBook Quellen an.</p>
+<pre><code class="language-yml">language: rust
+branches:
+  only:
+  - master
+before_install:
+    - set -e
+    - rustup self update
+install:
+    - source ~/.cargo/env || true
+    - true
+script:
+    - true
+after_success: |
+  [ $TRAVIS_BRANCH = master ] &amp;&amp;
+  [ $TRAVIS_PULL_REQUEST = false ] &amp;&amp;
+  cargo install --git https://github.com/rust-lang-nursery/mdBook.git &amp;&amp;
+  mdbook build &amp;&amp;
+  sudo pip install ghp-import &amp;&amp;
+  ghp-import -n book &amp;&amp;
+  git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+</code></pre>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#travis-berechtigungen" id="travis-berechtigungen"><h3>Travis Berechtigungen</h3></a>
+<p>Jetzt muss der Zugriff von Travis auf unser Github Repository aktiviert werden.</p>
+<p><img src="images/Erstellung-Dokumentation/00-Settings.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/01-click-Developer-settings.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/02-click-Personal-access-tokens.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/03-click-Generate-new-token.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/04-fill-in-Token-description.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/05-tick-public_repo.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/06-click-Generate-token.png" alt="" /></p>
+<p><strong>Schließe das Fenster nicht!</strong> Der Token ist nur in diesem Moment sichtbar. Im nächsten Befehl musst du <code>$YOUR_TOKEN</code> durch den grün hinterlegten Token ersetzen.</p>
+<pre><code class="language-bash">travis encrypt GH_TOKEN=$YOUR_TOKEN --add env.global
+</code></pre>
+<p>Jetzt kann das Fester mit dem Token geschlossen werden. Der letzte Befehl hat die Datei <code>.travis.yml</code> verändert und eine <code>secure:</code> Sektion angefügt.</p>
+<p>Die Datei <code>.travis.yml</code> wird nun auch in die Versionskontrolle aufgenommen.</p>
+<pre><code class="language-bash">git add .travis.yml
+git commit -m &quot;Add Travis&quot;
+git push
+</code></pre>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#travis-results" id="travis-results"><h3>Travis Results</h3></a>
+<p>Nun sollte unter der URL https://$YOUR_GITHUB_USER.github.io/$YOUR_REPO das gerenderte mdBook aufzurufen sein.</p>
+<p>Die Github Einstellungen findet man unter //Settings// -&gt; //Github Pages//</p>
+<p><img src="images/Erstellung-Dokumentation/07-search-Settings-Github-Pages-your-side-should-up-and-running-now.png" alt="" /></p>
+<a class="header" href="99-01-Erstellunge-Dokumentation.html#links" id="links"><h1>Links</h1></a>
+<ul>
+<li><a href="https://github.com">https://github.com</a></li>
+<li><a href="https://travis-ci.org">https://travis-ci.org</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="99-Dokumentation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="99-TODO.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="99-Dokumentation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="99-TODO.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+        
+        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+    </body>
+</html>

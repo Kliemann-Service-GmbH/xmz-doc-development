@@ -1,0 +1,731 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dokumentation xMZ (dev)</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="Dokumentation der xMZ-Plattform (Development Version)">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <base href="">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="_FontAwesome/css/font-awesome.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="01-Einleitung.html"><strong aria-hidden="true">1.</strong> Einleitung</a></li><li><a href="02-00-Funktionsbeschreibung.html"><strong aria-hidden="true">2.</strong> Funktionsbeschreibung</a></li><li><ol class="section"><li><a href="02-01-Funktionsbeschreibung-Server.html"><strong aria-hidden="true">2.1.</strong> Funktionsbeschreibung: Server</a></li></ol></li><li><a href="03-00-00-Implementation.html"><strong aria-hidden="true">3.</strong> Implementation</a></li><li><ol class="section"><li><a href="03-01-00-Server.html"><strong aria-hidden="true">3.1.</strong> Server</a></li><li><ol class="section"><li><a href="03-01-01-Implementation-Serverstart.html"><strong aria-hidden="true">3.1.1.</strong> Implementation: Serverstart</a></li><li><a href="03-01-02-Implementation-Bootstrap-Konfiguration.html"><strong aria-hidden="true">3.1.2.</strong> Implementation: Bootstrapping, Konfiguration und Laufzeit Informationen</a></li><li><a href="03-01-03-Implementation-Serverkonfiguration.html"><strong aria-hidden="true">3.1.3.</strong> Implementation: Serverkonfiguration</a></li><li><a href="03-01-04-Sensoren.html"><strong aria-hidden="true">3.1.4.</strong> Sensoren</a></li><li><a href="03-01-05-Zonen.html"><strong aria-hidden="true">3.1.5.</strong> Zonen</a></li><li><a href="03-01-06-Web_JSON_API.html"><strong aria-hidden="true">3.1.6.</strong> Web und JSON API</a></li></ol></li><li><a href="03-02-00-GUI.html"><strong aria-hidden="true">3.2.</strong> GUI</a></li></ol></li><li><a href="50-00-Verwaltung.html"><strong aria-hidden="true">4.</strong> Verwaltung</a></li><li><ol class="section"><li><a href="50-01-Verwaltung-Server.html"><strong aria-hidden="true">4.1.</strong> Verwaltung: Server</a></li></ol></li><li><a href="99-Buildsystem.html"><strong aria-hidden="true">5.</strong> Buildsystem</a></li><li><a href="99-Dokumentation.html"><strong aria-hidden="true">6.</strong> Dokumentation</a></li><li><ol class="section"><li><a href="99-01-Erstellunge-Dokumentation.html"><strong aria-hidden="true">6.1.</strong> Erstellung der Dokumentation</a></li></ol></li><li><a href="99-TODO.html"><strong aria-hidden="true">7.</strong> TODO</a></li><li><a href="99-Links.html"><strong aria-hidden="true">8.</strong> Links</a></li><li><a href="99-99-99-Observer-Pattern.html"><strong aria-hidden="true">9.</strong> Observer Pattern</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Dokumentation xMZ (dev)</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="print.html#dokumentation-der-xmz-plattform-development-version" id="dokumentation-der-xmz-plattform-development-version"><h1>Dokumentation der 'xMZ-Plattform' (Development Version)</h1></a>
+<p><img src="images/1477665135160_02-bw.jpg" alt="xMZ-Mod-Touch Gasmesszentrale mit Modbus Interface" /></p>
+<p>Diese Version beinhaltet alle Informationen die bei der Entwicklung der 'xMZ-Plattform' angefallen sind. Diese Informationen bilden die Grundlage der <a href="https://kliemann-service-gmbh.github.io/xmz-doc/">&quot;Dokumentation der 'xMZ-Plattform'&quot;</a>.</p>
+<a class="header" href="print.html#links" id="links"><h1>Links</h1></a>
+<ul>
+<li>'xMZ-Plattform'
+<ul>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xMZ-Plattform">Meta Repository für die 'xMZ-Plattform'</a></li>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-doc/">Dokumentation der 'xMZ-Plattform'</a></li>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-doc">Quellcode: Dokumentation der 'xMZ-Plattform'</a></li>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-doc-development/">Dokumentation der 'xMZ-Plattform' (Development Version) diese Dokumentation</a></li>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-doc-development">Quellcode: Dokumentation der 'xMZ-Plattform' (Development Version)</a></li>
+</ul>
+</li>
+<li><code>xmz-server</code>
+<ul>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-server">Quellcode <code>xmz-server</code></a></li>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-server/xmz_server/index.html">Api Dokumentation <code>xmz-server</code></a></li>
+</ul>
+</li>
+<li><code>xmz-gui</code>
+<ul>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-gui">Quellcode <code>xmz-gui</code></a></li>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-gui/xmz_gui/index.html">Api Dokumentation <code>xmz-gui</code></a></li>
+</ul>
+</li>
+</ul>
+<!-- Quellcode -->
+<!-- Dokumentaiton -->
+<!-- Bilder -->
+<a class="header" href="print.html#funktionsbeschreibung" id="funktionsbeschreibung"><h1>Funktionsbeschreibung</h1></a>
+<p>Die <strong>xMZ-Plattform</strong> besteht aus einem Serverteil (<code>xmz-server</code>) und einem oder mehreren so genannten Clients (z.B. <code>xmz-gui</code>).</p>
+<p>Ein Client kann zum Beispiel eine Oberfläche (die so genannte GUI) direkt an
+der Messzentrale sein. Aber auch Sichtplätze oder Zugriffe via Webbrowswer werden
+als Clientzugriffe bezeichnet.</p>
+<a class="header" href="print.html#funktionsbeschreibung-server" id="funktionsbeschreibung-server"><h1>Funktionsbeschreibung: Server</h1></a>
+<p>Der Server startet so früh wie möglich nach dem Start des Betriebssystem.</p>
+<p>Beim Start des Servers wird dessen Version (<code>$CARGO_PKG_VERSION</code>) auf <code>STDOUT</code> ausgegeben.</p>
+<p>Im Kapitel <a href="/50-01-Verwaltung-Server.html#verwaltung-server">Verwaltung: Server</a> wird erklärt wie man den Server neu starten, und den Status des Servers prüfen kann.</p>
+<a class="header" href="print.html#bootstrapping-konfiguration-und-laufzeit-informationen" id="bootstrapping-konfiguration-und-laufzeit-informationen"><h2>Bootstrapping, Konfiguration und Laufzeit Informationen</h2></a>
+<p>Beim allerersten Start des Servers wird die Server Instanz aus einer initialen
+Konfigurationsdatein () erstellt. Dieser Vorgang wird auch als <strong>Bootstrapping</strong>
+bezeichnet.
+Siehe <a href="/03-01-02-Implementation-Bootstrap-Konfiguration.html">&quot;Implementation: Bootstrapping, Konfiguration und Laufzeit Informationen&quot;</a></p>
+<p>Konnte aus dieser ersten Konfiguration eine funktionale Server Intanz gestartet werden, wird eine Datei mit den Laufzeit Informationen (der aktuelle Zustand des Servers) erzeugt.</p>
+<p>Alle weiteren Starts des Servers verwenden diese Laufzeit Informationen.</p>
+<p>Dies gewährleistet das Daten wie die Laufzeit &quot;persistent&quot; gespeichert werden können (d.h. das diese nicht nach einem Neustart verloren gehen).</p>
+<p><strong>Kann keine Instanz erstellt werden ist das ein Critical Fehler!!</strong> Der Server startet in diesem Fall nicht!</p>
+<a class="header" href="print.html#datei-initale-konfiguration-bootstrapping" id="datei-initale-konfiguration-bootstrapping"><h3>Datei: Initale Konfiguration, Bootstrapping</h3></a>
+<ul>
+<li><code>/boot/xmz-server.toml</code></li>
+</ul>
+<p>Diese Datein kann über die Umgebungsvariable <code>XMZ_SERVER_CONFIGURATION_PATH</code> geändert werden.</p>
+<a class="header" href="print.html#datei-laufzeit-informationen" id="datei-laufzeit-informationen"><h3>Datei: Laufzeit Informationen</h3></a>
+<ul>
+<li><code>/var/cache/xmz-server/status</code></li>
+</ul>
+<p>Diese Datein kann über die Umgebungsvariable <code>XMZ_SERVER_RUNTIME_INFO_PATH</code> geändert werden.</p>
+<a class="header" href="print.html#konfiguration-server" id="konfiguration-server"><h2>Konfiguration Server</h2></a>
+<p>Wie in der <a href="/03-01-02-Implementation-Serverkonfiguration.html">Implementation: Serverkonfiguration</a> beschreiben, werden zur Konfiguration der Serverkomponenten Umbgebungsvariablen verwendet.</p>
+<p>Es gibt verschiedene Arten dieser Environment Variablen:</p>
+<ul>
+<li><code>XMZ_SERVER_</code> - diese Variablen steuern Eigenschaften der Server Komponente</li>
+<li><code>ROCKET_</code> - diese Variablen steuern Eigenschaften der Rocket Web Komponente</li>
+</ul>
+<p>Die Umgebungsvariablen können &quot;von Hand&quot; beim Start der <code>xmz-server</code> Anwendung übergeben werden. In Produktivsystemen werden die Variablen via des systemd Unit Files übergeben.</p>
+<p><details>
+<summary>
+Click to show <code>xmz-server.service</code>
+</summary></p>
+<pre><code class="language-conf"># xmz-server.service
+#
+# systemd Unit für die xMZ-Plattform
+#
+[Unit]
+Description=&quot;Server der xMZ-Platform&quot;
+After=weston.service
+
+[Service]
+Type=simple
+Environment=XDG_RUNTIME_DIR=/run/user/0
+Environment=XMZ_HARDWARE=0.1.0
+Environment=LANG=de_DE.UTF-8
+Environment=&quot;ROCKET_ENV=prod&quot;
+Environment=&quot;ROCKET_ADDRESS=127.0.0.1&quot;
+Environment=&quot;ROCKET_PORT=1337&quot;
+Environment=&quot;ROCKET_LOG=critical&quot;
+ExecStart=/usr/bin/xmz-server
+Restart=always
+RestartSec=10s
+</code></pre>
+<p></details></p>
+<a class="header" href="print.html#aÜbersicht-umgebungsvariablen" id="aÜbersicht-umgebungsvariablen"><h3>Übersicht Umgebungsvariablen</h3></a>
+<table><thead><tr><th align="left">Umbgebunsvariable</th><th align="left">Funktionsbeschreibung</th></tr></thead><tbody>
+<tr><td align="left">XMZ_SERVER_CONFIGURATION_PATH</td><td align="left">Speicherort der initialen Bootstrap Konfigurationsdatei</td></tr>
+<tr><td align="left">XMZ_SERVER_RUNTIME_INFO_PATH</td><td align="left">Speicherort der Laufzeit Informationen</td></tr>
+<tr><td align="left">ROCKET_ENV</td><td align="left">Rocket Umgebung</td></tr>
+<tr><td align="left">ROCKET_ADDRESS</td><td align="left">Adresse über die die Rocket Instanz erreichbar ist</td></tr>
+</tbody></table>
+<a class="header" href="print.html#fehlerbehandlung" id="fehlerbehandlung"><h2>Fehlerbehandlung</h2></a>
+<p>Die Fehler können auf <code>STDERR</code> ausgegeben werden.</p>
+<a class="header" href="print.html#server-tread-json-api" id="server-tread-json-api"><h3>Server Tread: json API</h3></a>
+<p>Die Serverinstanz startet ein HTTP Server (<code>rocket</code>) mit einer json API die zur Komunikation mit weiteren Komponenten (GUI, Websites) dient.</p>
+<a class="header" href="print.html#server-tread-persistent-data" id="server-tread-persistent-data"><h3>Server Tread: Persistent Data</h3></a>
+<p>In regelmäßigen Abständen speichert der Server die aktuellen Laufzeit Informationen unter: <code>/var/cache/xmz-server/status</code></p>
+<a class="header" href="print.html#server-tread-sensoren-auslesen" id="server-tread-sensoren-auslesen"><h3>Server Tread: Sensoren auslesen</h3></a>
+<p>Die Serverinstanz starete ein internen Thread der alle konfigurierten Sensoren abfragt.</p>
+<a class="header" href="print.html#server-tread-auswertung" id="server-tread-auswertung"><h3>Server Tread: Auswertung</h3></a>
+<p>In diesem Thread werden folgende Komponenten ausgewertet:</p>
+<ul>
+<li>Zonen</li>
+<li>Laufzeit berechnent und,</li>
+<li>die Spannungsversorgung,</li>
+<li>Ladestand der Accu</li>
+</ul>
+<a class="header" href="print.html#links-1" id="links-1"><h1>Links</h1></a>
+<a class="header" href="print.html#implementation" id="implementation"><h1>Implementation</h1></a>
+<a class="header" href="print.html#default-implementationen" id="default-implementationen"><h2>Default Implementationen</h2></a>
+<ul>
+<li>alle Komponenten des Servers sollten <code>Default</code> Implementationen besizen</li>
+</ul>
+<a class="header" href="print.html#verwendete-crates" id="verwendete-crates"><h2>verwendete Crates</h2></a>
+<p>Unter anderen wurden folgende Crates verwendet.</p>
+<a class="header" href="print.html#serde" id="serde"><h2>serde</h2></a>
+<p>Serialisation und Deserialisation von Datenstrukturen. Wird von vielen
+verschiedenen Crates verwendet.
+<a href="https://crates.io/crates/serde">https://crates.io/crates/serde</a></p>
+<a class="header" href="print.html#toml" id="toml"><h2>toml</h2></a>
+<p>Dateisystemformat der <code>xmz-server</code> Konfiguration.
+<a href="https://crates.io/crates/toml">https://crates.io/crates/toml</a></p>
+<a class="header" href="print.html#bincode" id="bincode"><h2>bincode</h2></a>
+<p><a href="https://crates.io/crates/bincode"><code>bincode</code></a> ist ein kompaktes, binäres Datenformat.
+Die Laufzeit Informationen des <code>xmz-server</code> werden in diesem Format gespeichert.
+<a href="https://crates.io/crates/bincode">https://crates.io/crates/bincode</a></p>
+<a class="header" href="print.html#links-2" id="links-2"><h1>Links</h1></a>
+<ul>
+<li><a href="https://github.com/serde-rs/serde">serde</a></li>
+<li><a href="https://github.com/alexcrichton/toml-rs">toml</a></li>
+</ul>
+<a class="header" href="print.html#server" id="server"><h1>Server</h1></a>
+<p>Implementationsdetails des <code>xmz-server</code>.</p>
+<a class="header" href="print.html#datentypen-der-sensoren" id="datentypen-der-sensoren"><h2>Datentypen der Sensoren</h2></a>
+<p>Die Sensor Datentypen werden in <code>Vec&lt;Arc&lt;Mutex&lt;Box&lt;Sensor + Send&gt;&gt;&gt;&gt;</code> Containern
+gespeichert. Zu dieser Speicherung gibt es warscheinlich keine Alternative.
+Versuch die <code>Box&lt;Sensor + Send&gt;</code> in einfachen <code>Vec&lt;T&gt;</code> zu speichern scheitern
+schon in der <code>update</code> Funktion des Servers.
+Auch der Versuch die <code>Box&lt;Sensor + Send&gt;</code> in <code>Arc&lt;Mutex&lt;Vec&lt;Box&lt;Sensor + Send&gt;&gt;&gt;&gt;</code>
+zu speichern scheiterten an dem Versuch diese Struktur thread safe zu machen,
+auch hier was schon in der <code>update</code> Funktion des Servers schluss.</p>
+<p><a href="https://play.rust-lang.org/?gist=47a87dad21335e4fc96478ad5b44a3e2&amp;version=stable&amp;mode=debug">https://play.rust-lang.org/?gist=47a87dad21335e4fc96478ad5b44a3e2&amp;version=stable&amp;mode=debug</a></p>
+<a class="header" href="print.html#implementation-serverstart" id="implementation-serverstart"><h1>Implementation: Serverstart</h1></a>
+<p>Der Serverstart wird mit einem systemd Unit File realisiert.</p>
+<p><a href="https://github.com/zzeroo/meta-xmz-mod-touch/tree/master/recipes-xmz-mod-touch/xmz-server-init">https://github.com/zzeroo/meta-xmz-mod-touch/tree/master/recipes-xmz-mod-touch/xmz-server-init</a></p>
+<a class="header" href="print.html#systemd-unit" id="systemd-unit"><h2>systemd Unit</h2></a>
+<pre><code class="language-conf"># xmz-server.service
+#
+# systemd Unit für die xMZ-Plattform
+#
+[Unit]
+Description=&quot;Server der xMZ-Platform&quot;
+After=weston.service
+
+[Service]
+Type=simple
+Environment=XDG_RUNTIME_DIR=/run/user/0
+Environment=XMZ_HARDWARE=0.1.0
+Environment=LANG=de_DE.UTF-8
+Environment=&quot;ROCKET_ENV=prod&quot;
+Environment=&quot;ROCKET_ADDRESS=127.0.0.1&quot;
+Environment=&quot;ROCKET_PORT=1337&quot;
+Environment=&quot;ROCKET_LOG=critical&quot;
+ExecStart=/usr/bin/xmz-server
+Restart=always
+RestartSec=10s
+</code></pre>
+<a class="header" href="print.html#implementation-bootstrapping-konfiguration-und-laufzeit-informationen" id="implementation-bootstrapping-konfiguration-und-laufzeit-informationen"><h1>Implementation: Bootstrapping, Konfiguration und Laufzeit Informationen</h1></a>
+<p><img src="images/xmz-server-start.svg" alt="Flussdiagramm Bootrapping, Konfiguration" /></p>
+<p><a href="https://www.draw.io/#Lxmz-server-start">Draw.io</a></p>
+<a class="header" href="print.html#datenformat-laufzeit-information" id="datenformat-laufzeit-information"><h2>Datenformat Laufzeit Information</h2></a>
+<p>Die Laufzeit Informationen werden unter <code>/var/cache/xmz-server/status</code> im
+<a href="https://github.com/TyOverby/bincode"><code>bincode</code></a> Format gespeichert.</p>
+<p>Die initiale Konfiguration <code>/boot/xmz-server.toml</code> wird im <a href="https://github.com/alexcrichton/toml-rs"><code>toml</code></a> Datenformat
+gespeichert.</p>
+<a class="header" href="print.html#speicherort-laufzeit-informationen" id="speicherort-laufzeit-informationen"><h3>Speicherort: Laufzeit Informationen</h3></a>
+<ul>
+<li><code>/var/cache/xmz-server/status</code></li>
+</ul>
+<a class="header" href="print.html#speicherort-initale-konfiguration-bootstrapping" id="speicherort-initale-konfiguration-bootstrapping"><h3>Speicherort: Initale Konfiguration, Bootstrapping</h3></a>
+<ul>
+<li><code>/boot/xmz-server.toml</code></li>
+</ul>
+<a class="header" href="print.html#links-3" id="links-3"><h1>Links</h1></a>
+<ul>
+<li><a href="https://github.com/alexcrichton/toml-rs">TOML Repository</a></li>
+<li><a href="https://github.com/TyOverby/bincode">Bincode Repository</a></li>
+</ul>
+<!-- Bilder -->
+<a class="header" href="print.html#implementation-serverkonfiguration" id="implementation-serverkonfiguration"><h1>Implementation: Serverkonfiguration</h1></a>
+<p>Die Konfiguration des Servers entspricht den &quot;Vorgaben&quot; einer <a href="https://12factor.net/config">12-factor</a> Anwendungen.</p>
+<p>Es wird das <a href="https://github.com/withoutboats/configure"><code>configure Crate</code></a> verwendet.</p>
+<p>Das Dateiformat der Konfigurationsdatei ist <a href="https://github.com/alexcrichton/toml-rs">toml</a>.</p>
+<a class="header" href="print.html#links-4" id="links-4"><h1>Links</h1></a>
+<ul>
+<li><a href="https://12factor.net/config">&quot;The twelve-factor app&quot;</a></li>
+<li><a href="https://github.com/alexcrichton/toml-rs">https://github.com/alexcrichton/toml-rs</a></li>
+<li><a href="https://github.com/withoutboats/configure"><code>configure</code> Crate</a></li>
+</ul>
+<a class="header" href="print.html#sensoren" id="sensoren"><h1>Sensoren</h1></a>
+<p>Die Sensoren sind als <a href="https://kliemann-service-gmbh.github.io/xmz-server/xmz_server/server/sensor/trait.Sensor.html">Trait</a> definiert.</p>
+<a class="header" href="print.html#funktionen-des-traits" id="funktionen-des-traits"><h2>Funktionen des Traits</h2></a>
+<ul>
+<li>value (Direktwert)</li>
+<li>average (Mittelwert)</li>
+<li>update (Update der Werte)</li>
+</ul>
+<p>Die konkreten Sensortypen (Analog 4-20mA, CO/NO2 Modbus Kombisensor) implementieren dann diesen Sensor <a href="https://kliemann-service-gmbh.github.io/xmz-server/xmz_server/server/sensor/trait.Sensor.html">Trait</a>.</p>
+<p>Jedem Messwert ist ein Zeitstempel zugeordnet. Dieser wird bei der Mittelwert-
+bildung verwendet.</p>
+<p>Jede Sensor Instanz speichert die Messwerte der letzten 60 Minuten. Ältere Mess-
+werte werden verworfen.</p>
+<a class="header" href="print.html#sensortypen" id="sensortypen"><h2>Sensortypen</h2></a>
+<a class="header" href="print.html#ra-gas-co-sensor-modbus-cono2-kombisensor-mit-modbus-interface" id="ra-gas-co-sensor-modbus-cono2-kombisensor-mit-modbus-interface"><h3>RA-GAS CO Sensor Modbus (CO/NO2 Kombisensor mit Modbus Interface)</h3></a>
+<a class="header" href="print.html#ra-gas-no2-sensor-modbus-cono2-kombisensor-mit-modbus-interface" id="ra-gas-no2-sensor-modbus-cono2-kombisensor-mit-modbus-interface"><h3>RA-GAS NO2 Sensor Modbus (CO/NO2 Kombisensor mit Modbus Interface)</h3></a>
+<a class="header" href="print.html#a4-20ma-analog-sensor-an-mr-ci4-metz-konnect-modbus-interface" id="a4-20ma-analog-sensor-an-mr-ci4-metz-konnect-modbus-interface"><h3>4-20mA Analog Sensor an MR-CI4 (Metz Konnect Modbus Interface)</h3></a>
+<a class="header" href="print.html#simmulation-sensor-15minuten-mittelwert-15min-0-15min-max-___" id="simmulation-sensor-15minuten-mittelwert-15min-0-15min-max-___"><h3>Simmulation Sensor 15Minuten Mittelwert (15min 0, 15min max) &quot;<strong><em>|||</em></strong>|||___&quot;</h3></a>
+<a class="header" href="print.html#simmulation-sensor-30minuten-mittelwert-30min-0-30min-max-______" id="simmulation-sensor-30minuten-mittelwert-30min-0-30min-max-______"><h3>Simmulation Sensor 30Minuten Mittelwert (30min 0, 30min max) &quot;<strong><strong><strong>||||||</strong></strong></strong>||||||______&quot;</h3></a>
+<a class="header" href="print.html#sägezahn-____" id="sägezahn-____"><h3>Sägezahn &quot;<em><em>/_</em>/_</em>/__&quot;</h3></a>
+<a class="header" href="print.html#tablou-___" id="tablou-___"><h3>Tablou &quot;<em><strong>/||_</strong>/||_</em>_&quot;</h3></a>
+<a class="header" href="print.html#random-__" id="random-__"><h3>Random &quot;<strong>|_</strong>/|<em>/||||</em>_&quot;</h3></a>
+<a class="header" href="print.html#links-5" id="links-5"><h1>Links</h1></a>
+<ul>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-server/xmz_server/server/sensor/trait.Sensor.html">https://kliemann-service-gmbh.github.io/xmz-server/xmz_server/server/sensor/trait.Sensor.html</a></li>
+</ul>
+<a class="header" href="print.html#zonen" id="zonen"><h1>Zonen</h1></a>
+<a class="header" href="print.html#web-und-json-api" id="web-und-json-api"><h1>Web und JSON API</h1></a>
+<p><code>GET</code> Requests die von der Web/ JSON-API unterstützt werden:</p>
+<a class="header" href="print.html#json-api" id="json-api"><h2>JSON API</h2></a>
+<p>Die JSON API ist unter der URL <code>/api/</code> erreichbar</p>
+<ul>
+<li><code>GET /api/ HTTP/1.1</code> - Index liefert kompletten Server
+<ul>
+<li><a href="http://localhost:8000/">http://localhost:8000/</a></li>
+</ul>
+</li>
+<li><code>GET /api/sensors HTTP/1.1</code> - Sensoren Index, liefert alle Sensoren des Servers
+<ul>
+<li><a href="http://localhost:8000/sensors">http://localhost:8000/sensors</a></li>
+</ul>
+</li>
+<li><code>GET /api/sensor/&lt;id&gt; HTTP/1.1</code> - Liefert den Sensore mit der <code>&lt;id&gt;</code>, oder 404 wenn dieser nicht exisitert
+<ul>
+<li><a href="http://localhost:8000/sensor/0">http://localhost:8000/sensor/0</a></li>
+</ul>
+</li>
+<li><code>GET /api/sensor/&lt;id&gt;/messzellen HTTP/1.1</code> - Messzellen Index, liefert alle Messzellen des Sensors
+<ul>
+<li><a href="http://localhost:8000/sensor/0/messzellen">http://localhost:8000/sensor/0/messzellen</a></li>
+</ul>
+</li>
+<li><code>GET /api/sensor/&lt;sensor_id&gt;/messzelle/&lt;id&gt; HTTP/1.1</code> - Liefert die Messzelle mit der <code>&lt;id&gt;</code> oder 404 wenn diese nicht existiert
+<ul>
+<li><a href="http://localhost:8000/sensor/0/messzelle/0">http://localhost:8000/sensor/0/messzelle/0</a></li>
+</ul>
+</li>
+</ul>
+<a class="header" href="print.html#gui" id="gui"><h1>GUI</h1></a>
+<a class="header" href="print.html#verwaltung" id="verwaltung"><h1>Verwaltung</h1></a>
+<a class="header" href="print.html#verwaltung-server" id="verwaltung-server"><h1>Verwaltung: Server</h1></a>
+<p>Über eine serielle Schnittstelle oder eine SSH Verbindung kann der Server
+verwaltet werden.
+Dazu können die systemd Werkszeuge <code>systemctl</code> und <code>journalctl</code> verwendet werden.</p>
+<a class="header" href="print.html#server-status" id="server-status"><h2>Server Status</h2></a>
+<pre><code class="language-bash">systemctl status xmz-server
+</code></pre>
+<a class="header" href="print.html#server-stoppen" id="server-stoppen"><h2>Server stoppen</h2></a>
+<pre><code class="language-bash">systemctl stop xmz-server
+</code></pre>
+<a class="header" href="print.html#server-starten" id="server-starten"><h2>Server starten</h2></a>
+<pre><code class="language-bash">systemctl start xmz-server
+</code></pre>
+<p>Alternative kann auch der <code>restart</code> Befehl verwendet werden. Hier wird der Server
+vorab beendet, wenn er im Moment aktiv ist, und anschließend neu gestartet.</p>
+<pre><code class="language-bash">systemctl restart xmz-server
+</code></pre>
+<a class="header" href="print.html#buildsystem" id="buildsystem"><h1>Buildsystem</h1></a>
+<ul>
+<li>via Docker</li>
+<li>https://github.com/zzeroo/easy-build</li>
+</ul>
+<pre><code class="language-bash">docker build -t zzeroo/build-yocto ../build-yocto/
+</code></pre>
+<pre><code class="language-bash">mkdir src/easy-build/shared
+cd src/easy-build/shared/
+</code></pre>
+<pre><code class="language-bash">docker run -ti --volume=(pwd):/home/build/ zzeroo/build-yocto:latest
+</code></pre>
+<a class="header" href="print.html#dokumentation" id="dokumentation"><h1>Dokumentation</h1></a>
+<p>Die Dokumentation wird mit der Software <a href="https://github.com/rust-lang-nursery/mdBook">mdBook</a> realisiert.</p>
+<p>Es gibt zwei Arten Dokumentation, eine für Endanwender und Kunden, sowie eine Version für Entwickler und Techniker.</p>
+<a class="header" href="print.html#erstellung-der-dokumentation" id="erstellung-der-dokumentation"><h1>Erstellung der Dokumentation</h1></a>
+<p>Die Dokumentation wird via <a href="https://pages.github.com/">Github Pages</a> gehostet.
+Branch <code>gh-pages</code>
+URL <code>https://$USERNAME.github.io/$REPOSITORY</code></p>
+<p>Gebaut mit <a href="https://travis-ci.org">TravisCI</a></p>
+<p>Travis ist die Quelle des allseits beliebten Badges wie diese <img src="images/Erstellung-Dokumentation/travis-unknown.svg" alt="Travis Buildstatus" /></p>
+<a class="header" href="print.html#installation-mdbook" id="installation-mdbook"><h2>Installation mdBook</h2></a>
+<p>Wie auf der <a href="https://github.com/rust-lang-nursery/mdBook">mdBook Projektseite</a> beschrieben wird vorab die Software mdBook auf dem lokalen Entwickler PC installiert.</p>
+<pre><code class="language-bash">cargo install mdbook
+</code></pre>
+<a class="header" href="print.html#dateisystemlayout-erstellen" id="dateisystemlayout-erstellen"><h2>Dateisystemlayout erstellen</h2></a>
+<p>Als nächstes wird ein Verzeichis erstellt das den Quellcode des mdBook enthält.</p>
+<pre><code class="language-bash">mkdir xmz-doc
+</code></pre>
+<a class="header" href="print.html#git-repository-erstellen" id="git-repository-erstellen"><h2>Git Repository erstellen</h2></a>
+<p>Wie alle Komponenten der [xMZ-Plattform][xmz] wird auch der Quellcode des mdBook in der Versionskontrolle GIT, auf Github gehalten.</p>
+<p>Wir erstellen also nun erst einmal ein lokales, leeres Git Repository</p>
+<pre><code class="language-bash">cd xmz-doc
+git init .
+</code></pre>
+<a class="header" href="print.html#mdbook-initalisieren" id="mdbook-initalisieren"><h2>mdBook initalisieren</h2></a>
+<p>Nun wird ein leeres mdBook initalisiert. Hierbei werden ein paar grundlegende Dateien angelegt.</p>
+<p>Die Frage ob eine <code>.gitignore</code> Datei angelegt werden soll muss mit <strong>ja (y)</strong> beantwortet werden.</p>
+<pre><code class="language-bash">mdbook init .
+</code></pre>
+<a class="header" href="print.html#git-repo-füllen" id="git-repo-füllen"><h2>Git Repo füllen</h2></a>
+<p>Das Dateisystemlayout sollte nun in etwa so aussehen:</p>
+<pre><code class="language-bash">$ tree
+.
+├── book
+├── book.toml
+├── LICENSE
+├── README.md
+└── src
+    ├── chapter_1.md
+    └── SUMMARY.md
+
+2 directories, 5 files
+</code></pre>
+<p>Die Dateien <code>README.md</code> und <code>LICENSE</code> habe ich manuell eingefügt, dieser Schritt ist optional.</p>
+<p>Mit dem Befehl</p>
+<pre><code class="language-bash">git add .
+</code></pre>
+<p>werden nun die Dateien in die Git Versionskontrolle aufgenommen. Das heist Dateien und Ordner die in der <code>.gitignore</code> Datei gelistet sind werden ignoriert.</p>
+<p>Anschließend wir mit dem Befehl,</p>
+<pre><code class="language-bash">git commit -a -m &quot;Erster Commit, mdBook Grundstruktur&quot;
+</code></pre>
+<p>dieser Stand in die Änderungsliste aufgenommen.</p>
+<a class="header" href="print.html#git-repo-auf-github-veröffentlichen" id="git-repo-auf-github-veröffentlichen"><h2>Git Repo auf Github veröffentlichen</h2></a>
+<p>Als nächstes legen wir auf <a href="https://github.com">Github.com</a> ein Repository an.</p>
+<p>Klickt dazu in eurem Profil auf den grünen &quot;New repository&quot; Button ...</p>
+<p><img src="images/Erstellung-Dokumentation/00-github-New-repository.png" alt="" /></p>
+<p>und füllt die entsprechenden Felder aus.</p>
+<p><img src="images/Erstellung-Dokumentation/01-github-Create-new-repository.png" alt="" /></p>
+<p>Nachdem auf den grünen Button &quot;Create repository&quot; geklickt wurde kann die Remote Adresse in das lokale Git Repository eingetragen werden.</p>
+<pre><code class="language-bash">git remote add origin git@github.com:Kliemann-Service-GmbH/xmz-doc.git
+</code></pre>
+<p>Anschließend wird der master Branch in den remoten Origin Zweig gepusht.</p>
+<pre><code class="language-bash">git push -u origin master
+</code></pre>
+<p>Das Repository ist nun unter der URL https://github.com/Kliemann-Service-GmbH/xmz-doc erreichbar.</p>
+<a class="header" href="print.html#repo-in-travis-aktivieren" id="repo-in-travis-aktivieren"><h2>Repo in Travis aktivieren</h2></a>
+<p>Als nächstes müssen wir das Github Repository in <a href="https://travis-ci.org">Travis</a> aktivieren.</p>
+<p>Dazu öffnen wir die URL https://travis-ci.org/ im Browser.</p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-00-new.png" alt="" /></p>
+<p>Ein Klick auf das Plus Symbol führt zu einer Übersicht der Github Repositories.</p>
+<p>Travis aktualisert die Liste nicht automatisch wenn wir auf Github ein neues Repo erstellt haben müssen wir mit dem Button <strong>Sync account</strong> die Travis-Repo-Liste aktualisieren.</p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-01-Sync-account.png" alt="" /></p>
+<p>Anschließend wird mti dem kleinen Schalter vor dem Namen des Repos das Repository in Travis aktiviert.</p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-02-Repo-disabled.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/travis-repo-03-Repo-enabled.png" alt="" /></p>
+<a class="header" href="print.html#travis-einbinden" id="travis-einbinden"><h3>Travis einbinden</h3></a>
+<p>Travis benutzt die Datei <code>.travis.yml</code> zur Konfiguration.</p>
+<p>Lege nun diese Datei im Root der mdBook Quellen an.</p>
+<pre><code class="language-yml">language: rust
+branches:
+  only:
+  - master
+before_install:
+    - set -e
+    - rustup self update
+install:
+    - source ~/.cargo/env || true
+    - true
+script:
+    - true
+after_success: |
+  [ $TRAVIS_BRANCH = master ] &amp;&amp;
+  [ $TRAVIS_PULL_REQUEST = false ] &amp;&amp;
+  cargo install --git https://github.com/rust-lang-nursery/mdBook.git &amp;&amp;
+  mdbook build &amp;&amp;
+  sudo pip install ghp-import &amp;&amp;
+  ghp-import -n book &amp;&amp;
+  git push -fq https://${GH_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git gh-pages
+</code></pre>
+<a class="header" href="print.html#travis-berechtigungen" id="travis-berechtigungen"><h3>Travis Berechtigungen</h3></a>
+<p>Jetzt muss der Zugriff von Travis auf unser Github Repository aktiviert werden.</p>
+<p><img src="images/Erstellung-Dokumentation/00-Settings.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/01-click-Developer-settings.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/02-click-Personal-access-tokens.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/03-click-Generate-new-token.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/04-fill-in-Token-description.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/05-tick-public_repo.png" alt="" /></p>
+<p><img src="images/Erstellung-Dokumentation/06-click-Generate-token.png" alt="" /></p>
+<p><strong>Schließe das Fenster nicht!</strong> Der Token ist nur in diesem Moment sichtbar. Im nächsten Befehl musst du <code>$YOUR_TOKEN</code> durch den grün hinterlegten Token ersetzen.</p>
+<pre><code class="language-bash">travis encrypt GH_TOKEN=$YOUR_TOKEN --add env.global
+</code></pre>
+<p>Jetzt kann das Fester mit dem Token geschlossen werden. Der letzte Befehl hat die Datei <code>.travis.yml</code> verändert und eine <code>secure:</code> Sektion angefügt.</p>
+<p>Die Datei <code>.travis.yml</code> wird nun auch in die Versionskontrolle aufgenommen.</p>
+<pre><code class="language-bash">git add .travis.yml
+git commit -m &quot;Add Travis&quot;
+git push
+</code></pre>
+<a class="header" href="print.html#travis-results" id="travis-results"><h3>Travis Results</h3></a>
+<p>Nun sollte unter der URL https://$YOUR_GITHUB_USER.github.io/$YOUR_REPO das gerenderte mdBook aufzurufen sein.</p>
+<p>Die Github Einstellungen findet man unter //Settings// -&gt; //Github Pages//</p>
+<p><img src="images/Erstellung-Dokumentation/07-search-Settings-Github-Pages-your-side-should-up-and-running-now.png" alt="" /></p>
+<a class="header" href="print.html#links-6" id="links-6"><h1>Links</h1></a>
+<ul>
+<li><a href="https://github.com">https://github.com</a></li>
+<li><a href="https://travis-ci.org">https://travis-ci.org</a></li>
+</ul>
+<a class="header" href="print.html#todo" id="todo"><h1>TODO</h1></a>
+<ul>
+<li>Image sichern
+<ul>
+<li><code>$USER</code> Anstelle von <code>root</code></li>
+<li>SSH Zugriff ausschließlich via KEY</li>
+<li>SSH Key per Image</li>
+</ul>
+</li>
+<li>Image: Kernel, Spectre und Meltdown beobachten, unkritisch zur Zeit</li>
+<li>Image: individueller Hostname</li>
+<li>xmz-doc: Anleitung SSH Verbindung herstellen</li>
+<li>xmz-doc: systemctl Befehler server, gui, usw. (Funktionsbeschreibung Server)</li>
+</ul>
+<a class="header" href="print.html#links-7" id="links-7"><h1>Links</h1></a>
+<ul>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xMZ-Plattform">src-xmz</a></li>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-doc-development">src-doc-xmz-dev</a></li>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-doc">src-doc-xmz</a></li>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-server">src-xmz-server</a></li>
+<li><a href="https://github.com/Kliemann-Service-GmbH/xmz-gui">src-xmz-gui</a></li>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-server/xmz_server/index.html">doc-xmz-server</a></li>
+<li><a href="https://kliemann-service-gmbh.github.io/xmz-gui/xmz_gui/index.html">doc-xmz-gui</a></li>
+<li><a href="images/1477665135160_02-bw.jpg">xmz-mod-touch</a></li>
+</ul>
+<!-- Quellcode -->
+<!-- Dokumentaiton -->
+<!-- Bilder -->
+<a class="header" href="print.html#observer-pattern" id="observer-pattern"><h1>Observer Pattern</h1></a>
+<pre><pre class="playpen"><code class="language-rust">/// https://z0ltan.wordpress.com/2017/06/23/the-observer-pattern-in-rust/
+extern crate rand;
+
+trait Observable&lt;T&gt; {
+    fn register(&amp;mut self, observer: Box&lt;Observer&lt;Item = T&gt;&gt;);
+}
+
+trait Observer {
+    type Item;
+
+    fn notify(&amp;self, val: &amp;Self::Item);
+}
+
+struct EvenCounter {
+    counter: u32,
+    observers: Vec&lt;Box&lt;Observer&lt;Item = u32&gt;&gt;&gt;,
+}
+
+impl EvenCounter {
+    fn new() -&gt; Self {
+        EvenCounter {
+            counter: 0u32,
+            observers: Vec::new(),
+        }
+    }
+
+    fn run(&amp;mut self) {
+        loop {
+            use std::thread;
+            use std::time::Duration;
+
+            thread::sleep(Duration::from_millis(self.get_rand_duration()));
+
+            self.counter += 1;
+
+            if self.counter % 2 == 0 {
+                for observer in self.observers.iter() {
+                    observer.notify(&amp;self.counter);
+                }
+            }
+        }
+    }
+
+    fn get_rand_duration(&amp;self) -&gt; u64 {
+        use rand::{Rng, thread_rng};
+        let mut rng = thread_rng();
+        rng.gen_range(0, 1000)
+    }
+}
+
+impl Observable&lt;u32&gt; for EvenCounter {
+    fn register(&amp;mut self, observer: Box&lt;Observer&lt;Item = u32&gt;&gt;) {
+        self.observers.push(observer);
+    }
+}
+
+
+struct EvenObserver {
+    name: String,
+}
+
+impl EvenObserver {
+    fn new(name: String) -&gt; Self {
+        EvenObserver { name }
+    }
+
+    fn name(&amp;self) -&gt; &amp;str {
+        &amp;self.name
+    }
+}
+
+impl Observer for EvenObserver {
+    type Item = u32;
+
+    fn notify(&amp;self, val: &amp;Self::Item) {
+        println!(&quot;'{}' got: {}&quot;, self.name(), val);
+    }
+}
+
+fn main() {
+    let mut foo = EvenCounter::new();
+    let (bar, baz, quux) = (Box::new(EvenObserver::new(&quot;bar&quot;.to_string())),
+                            Box::new(EvenObserver::new(&quot;baz&quot;.to_string())),
+                            Box::new(EvenObserver::new(&quot;quux&quot;.to_string())));
+
+    foo.register(bar);
+    foo.register(baz);
+    foo.register(quux);
+
+    foo.run();
+}
+</code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                window.print();
+            })
+        </script>
+        
+
+        
+
+        
+        <script src="searchindex.js" type="text/javascript" charset="utf-8"></script>
+        
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+    </body>
+</html>
