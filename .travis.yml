@@ -13,7 +13,7 @@ script:
 after_success: |
   [ $TRAVIS_BRANCH = master ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
-  cargo install mdBook &&
+  cargo install mdbook &&
   mdbook build &&
   sudo pip install ghp-import &&
   ghp-import -n book &&
