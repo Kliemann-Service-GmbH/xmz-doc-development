@@ -13,7 +13,7 @@ script:
 after_success: |
   [ $TRAVIS_BRANCH = master ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
-  cargo install -p mdbook --git https://github.com/rust-lang-nursery/mdBook.git &&
+  cargo install mdBook &&
   mdbook build &&
   sudo pip install ghp-import &&
   ghp-import -n book &&
